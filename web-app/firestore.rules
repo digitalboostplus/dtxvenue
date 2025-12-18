@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // -- Functions -- //
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isOrgMember(orgId) {
+      // Check if user's orgId matches the doc's orgId
+      // In a real app, this would be a custom claim or a user doc lookup
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.organizationId == orgId;
+    }
+
+    // -- User Profiles -- //
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || getUserRole() == 'admin');
+      allow create: if isAuthenticated() && request.auth.uid == userId; // Initial signup
+      allow update: if isAuthenticated() && request.auth.uid == userId; // Self-manage profile
+    }
+
+    // -- Organizations -- //
+    match /organizations/{orgId} {
+      allow read: if isOrgMember(orgId);
+      
+      // Events
+      match /events/{eventId} {
+        allow read: if isOrgMember(orgId);
+        allow write: if isOrgMember(orgId) && (getUserRole() == 'admin' || getUserRole() == 'manager');
+        
+        // Transactions (High volume)
+        match /transactions/{txId} {
+          allow read: if isOrgMember(orgId) && (getUserRole() == 'admin' || getUserRole() == 'manager');
+          allow create: if isOrgMember(orgId) && (getUserRole() == 'seller' || getUserRole() == 'manager' || getUserRole() == 'admin');
+        }
+      }
+
+      // Inventory
+      match /inventory/{productId} {
+        allow read: if isOrgMember(orgId);
+        allow write: if isOrgMember(orgId) && (getUserRole() == 'admin' || getUserRole() == 'manager');
+      }
+    }
+
+    // -- Leads & Prospects -- //
+    match /leads/{leadId} {
+      allow create: if true; // Public can submit leads
+      allow read, update, delete: if isAuthenticated() && getUserRole() == 'admin';
+    }
+  }
+}
