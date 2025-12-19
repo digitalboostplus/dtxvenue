@@ -71,48 +71,48 @@ export default function EventsPage() {
                                 style={{ background: event.image }}
                             ></div>
 
-                            <div className="relative z-20 p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                            <div className="relative z-20 p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8">
                                 {/* Date Badge */}
-                                <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 w-24 h-24 rounded-2xl shrink-0">
-                                    <span className="text-xs font-bold uppercase text-white/60">{event.date.split(" ")[0]}</span>
-                                    <span className="text-3xl font-black">{event.date.split(" ")[1].replace(",", "")}</span>
+                                <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 w-20 h-20 md:w-24 md:h-24 rounded-2xl shrink-0">
+                                    <span className="text-[10px] md:text-xs font-bold uppercase text-white/60">{event.date.split(" ")[0]}</span>
+                                    <span className="text-2xl md:text-3xl font-black">{event.date.split(" ")[1].replace(",", "")}</span>
                                 </div>
 
                                 {/* Event Info */}
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/20 uppercase tracking-widest">
+                                <div className="flex-1 w-full">
+                                    <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-2 md:mb-3">
+                                        <span className="text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/20 uppercase tracking-widest">
                                             {event.tour}
                                         </span>
                                         {event.status === "Selling Fast" && (
-                                            <span className="text-xs font-bold px-3 py-1 rounded-full bg-orange-500/20 text-orange-500 border border-orange-500/20 uppercase tracking-widest flex items-center gap-1">
+                                            <span className="text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full bg-orange-500/20 text-orange-500 border border-orange-500/20 uppercase tracking-widest flex items-center gap-1">
                                                 <Star size={10} fill="currentColor" /> Selling Fast
                                             </span>
                                         )}
                                     </div>
-                                    <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-2 group-hover:text-primary transition-colors">{event.artist}</h2>
-                                    <div className="flex flex-wrap gap-4 text-sm font-medium text-white/60">
+                                    <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-2 group-hover:text-primary transition-colors">{event.artist}</h2>
+                                    <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs md:text-sm font-medium text-white/60">
                                         <div className="flex items-center gap-2">
-                                            <MapPin size={16} />
+                                            <MapPin size={14} className="md:w-4 md:h-4" />
                                             {event.venue} — {event.city}
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Clock size={16} />
+                                            <Clock size={14} className="md:w-4 md:h-4" />
                                             Doors: {event.time}
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Action */}
-                                <div className="flex flex-col items-end gap-2 shrink-0">
-                                    <div className="text-right">
+                                <div className="flex flex-col items-start md:items-end gap-4 md:gap-2 shrink-0 w-full md:w-auto">
+                                    <div className="md:text-right">
                                         <div className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Starting at</div>
-                                        <div className="text-2xl font-black">{event.price}</div>
+                                        <div className="text-xl md:text-2xl font-black">{event.price}</div>
                                     </div>
-                                    <Link href={`/events/${event.id}`} className="bg-white text-black hover:bg-white/90 px-8 py-4 rounded-full font-bold flex items-center gap-2 transition-transform hover:scale-105 active:scale-95">
-                                        <Ticket size={20} />
-                                        {event.status === "Sold Out" ? "Join Waitlist" : "Get Tickets"}
-                                        <ArrowRight size={20} />
+                                    <Link href={`/events/${event.id}`} className="bg-white text-black hover:bg-white/90 px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95 w-full md:w-auto">
+                                        <Ticket size={18} className="md:w-5 md:h-5" />
+                                        {event.status === "Sold Out" ? "Waitlist" : "Get Tickets"}
+                                        <ArrowRight size={18} className="md:w-5 md:h-5" />
                                     </Link>
                                 </div>
                             </div>

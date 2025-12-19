@@ -7,21 +7,21 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-8 flex flex-col items-center text-center">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-full -z-10 animate-pulse"></div>
-        <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tight animate-fade-in">
-          ELEVATE YOUR <br />
+      <section className="relative pt-32 md:pt-40 pb-20 px-6 md:px-8 flex flex-col items-center text-center">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[400px] bg-primary/20 blur-[80px] md:blur-[120px] rounded-full -z-10 animate-pulse"></div>
+        <h1 className="text-5xl md:text-8xl font-black mb-6 tracking-tight animate-fade-in leading-[1.1]">
+          ELEVATE YOUR <br className="hidden md:block" />
           <span className="gradient-text">LIVE EXPERIENCE</span>
         </h1>
-        <p className="text-xl text-white/60 max-w-2xl mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <p className="text-lg md:text-xl text-white/60 max-w-2xl mb-12 animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
           The all-in-one commerce platform for tours, festivals, and venues.
           Real-time inventory, seamless settlements, and a voice-powered concierge.
         </p>
-        <div className="flex gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <button className="bg-secondary hover:bg-secondary/80 text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105">
+        <div className="flex flex-col sm:flex-row gap-4 animate-fade-in w-full max-w-md md:max-w-none px-4" style={{ animationDelay: '0.4s' }}>
+          <button className="bg-secondary hover:bg-secondary/80 text-white px-8 py-4 rounded-full font-bold transition-all hover:scale-105 w-full sm:w-auto">
             Book a Demo
           </button>
-          <Link href="/events" className="glass px-8 py-3 rounded-full font-bold border border-white/10 hover:border-white/30 transition-all text-center">
+          <Link href="/events" className="glass px-8 py-4 rounded-full font-bold border border-white/10 hover:border-white/30 transition-all text-center w-full sm:w-auto">
             Explore Events
           </Link>
         </div>
